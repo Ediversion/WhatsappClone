@@ -6,7 +6,7 @@ import { Fontisto } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
+import ChatsScreen from '../screens/ChatsScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { MainTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 
@@ -18,20 +18,20 @@ export default function MainTabNavigator() {
   return (
     <MainTab.Navigator
       initialRouteName="Chats"
-      tabBarOptions={{ 
+      tabBarOptions={{
         activeTintColor: Colors[colorScheme].background,
         style: {
           backgroundColor: Colors[colorScheme].tint,
         },
-        indicatorStyle:{
+        indicatorStyle: {
           backgroundColor: Colors[colorScheme].background,
           heigth: 4,
         },
-        labelStyle:{
+        labelStyle: {
           fontWeight: 'bold',
         },
         showIcon: true,
-        }}>
+      }}>
       <MainTab.Screen
         name="Camera"
         component={TabOneNavigator}
@@ -42,7 +42,7 @@ export default function MainTabNavigator() {
       />
       <MainTab.Screen
         name="Chats"
-        component={TabTwoNavigator}
+        component={ChatsScreen}
       />
       <MainTab.Screen
         name="Status"
@@ -71,7 +71,7 @@ function TabOneNavigator() {
     <TabOneStack.Navigator>
       <TabOneStack.Screen
         name="TabOneScreen"
-        component={TabOneScreen}
+        component={ChatsScreen}
         options={{ headerTitle: 'Tab One Title' }}
       />
     </TabOneStack.Navigator>

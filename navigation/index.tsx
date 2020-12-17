@@ -4,9 +4,10 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { ColorSchemeName } from 'react-native';
 import Colors from '../constants/Colors';
-import { Octicons, MaterialCommunityIcons } from '@expo/vector-icons'
+import { Octicons, MaterialCommunityIcons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons'
 
 import NotFoundScreen from '../screens/NotFoundScreen';
+import ChatRoomScreen from '../screens/ChatRoom';
 import { RootStackParamList } from '../types';
 import MainTabNavigator from './MainTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -29,8 +30,8 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ 
-      headerStyle:{
+    <Stack.Navigator screenOptions={{
+      headerStyle: {
         backgroundColor: Colors.light.tint,
         shadowOpacity: 0,
         elevation: 0,
@@ -40,25 +41,48 @@ function RootNavigator() {
       headerTitleStyle: {
         fontWeight: 'bold',
       }
-       }}>
+    }}>
       <Stack.Screen name="Root"
-       component={MainTabNavigator}
-       options={{
-         title: 'ChatApp',
-         headerRight: () => (
-           <View style={{
-             flexDirection: 'row',
+        component={MainTabNavigator}
+        options={{
+          title: 'ChatApp',
+          headerRight: () => (
+            <View style={{
+              flexDirection: 'row',
               width: 60,
               justifyContent: 'space-between',
               marginRight: 10,
 
-              }}>
-             <Octicons name='search' size={22} color={'black'} />
-             <MaterialCommunityIcons name='dots-vertical' size={22} color={'black'}/>
-           </View>
-         )
-       }}
-        />
+            }}>
+              <Octicons name='search' size={22} color={'black'} />
+              <MaterialCommunityIcons name='dots-vertical' size={22} color={'black'} />
+            </View>
+          )
+        }}
+      />
+      <Stack.Screen
+        name="ChatRoom"
+        component={ChatRoomScreen}
+        options={({ route }) => ({
+          title: route.params.name,
+          headerRight: () => (
+            <View style={{
+              flexDirection: 'row',
+              width: 100,
+              justifyContent: 'space-between',
+              marginRight: 10,
+
+            }}>
+              <FontAwesome5 name="video" size={22} color={'white'} />
+              <MaterialIcons name="call" size={22} color={'white'} />
+              <MaterialCommunityIcons name="dots-vertical" size={22} color={'white'} />
+
+            </View>
+          )
+
+        })}
+      />
+
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );
